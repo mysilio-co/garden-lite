@@ -9,8 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@udecode/plate-core": "^18.7.0",
     "next": "13.0.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "scheduler": "^0.23.0",
+    "slate": "^0.84.0",
+    "slate-history": "^0.66.0",
+    "slate-hyperscript": "^0.77.0",
+    "slate-react": "^0.83.2"
   }
 }
