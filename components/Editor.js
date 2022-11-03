@@ -11,9 +11,10 @@ import {
   createBasicMarksPlugin,
   MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE
 } from '@udecode/plate-basic-marks'
-import { createLinkPlugin } from '@udecode/plate-link'
+import { createLinkPlugin, ELEMENT_LINK } from '@udecode/plate-link'
 
 import Toolbar from './Toolbar'
+import { elementStore } from '@udecode/plate-core';
 
 const editableProps = {
   placeholder: 'Type...',
@@ -36,6 +37,7 @@ const plugins = createPlugins([
     [ELEMENT_H6]: ({ attributes, children }) => <h6 {...attributes} className="text-base">{children}</h6>,
     [ELEMENT_PARAGRAPH]: ({ attributes, children }) => <p {...attributes} className="text-base">{children}</p>,
     [ELEMENT_BLOCKQUOTE]: ({ attributes, children }) => <blockquote {...attributes} className="text-base text-gray-400 border-l-2 border-solid border-gray-400 p-2">{children}</blockquote>,
+    [ELEMENT_LINK]: ({ attributes, children, element }) => <a {...attributes} href={element.url} className="text-blue-700">{children}</a>,
     [MARK_BOLD]: ({ attributes, children }) => <b {...attributes} className="font-bold">{children}</b>,
     [MARK_CODE]: ({ attributes, children }) => <code {...attributes} className="font-mono">{children}</code>,
     [MARK_ITALIC]: ({ attributes, children }) => <i {...attributes} className="italic">{children}</i>,
@@ -132,7 +134,9 @@ export default function Editor({ onChange }) {
     <PlateProvider
       onChange={onChange}
       plugins={plugins}
-      initialValue={initialValue}>
+      initialValue={initialValue}
+      normalizeInitialValue={true}
+    >
       <div>
         <Toolbar />
         <Plate
